@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "studentcrud"
+version = "0.1.0"
+description = ""
+authors = ["umairkhanofficial <umairkhansadiq@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+sqlmodel = "^0.0.16"
+uvicorn = "^0.29.0"
+standard = "^1.0.3"
+
+[tool.poetry.scripts]
+dev= "studentcrud.main:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
