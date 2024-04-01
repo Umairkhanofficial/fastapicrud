@@ -1,7 +1,10 @@
 # FastAPI Python API
 
 This is a simple FastAPI Python API for managing student records.
+# pytest
+poetry run pytest
 
+This is a simple FastAPI Python API for managing student records.
 ## To Run Project
  poetry run dev
 1. 
