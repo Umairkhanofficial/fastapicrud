@@ -57,6 +57,10 @@ def deleteStudent(studentid:int):
             return student_List
         else: return "No Record found"
 
+@app.get("/temp")
+def temp():
+    print("hello")
+    return "temp"
 
 def start():
     uvicorn.run("studentcrud.main:app",host="127.0.0.1",port=8080,reload=True),
