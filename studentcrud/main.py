@@ -25,7 +25,7 @@ def students():
     return student_List
 #get single student
 @app.get("/singlestudent/{studentid}")
-def singleStudent(studentid: int):
+def singleStudent(studentid:Annotated[int,Path(ge=2)]):
     for student in student_List:
         if student["studentID"] == studentid:
             return student
