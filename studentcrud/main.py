@@ -1,14 +1,23 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Path,Query
 import uvicorn 
+from pydantic import BaseModel
+from typing import Annotated 
+
 
 app = FastAPI()
 student_List = [
-    {"studentID":1,
+    {"studentID":4,
      "Name":"Umair",
      "Age":26,
      "Class": "Api"
      }
 ]
+
+@app.get("/person")
+def perso(person):
+    return person
+
+
 #all students in list
 @app.get("/students")
 def students():
@@ -23,7 +32,8 @@ def singleStudent(studentid: int):
     return {"message": "Student not found"}
 
 @app.post("/addstudent")
-def addStudent(studentid:int,Name,Age,Class):
+def addStudent(studentid:Annotated[int,Query(ge=2)],Name,Age,Class):
+ 
     global student_List
     student_List.append({"studentID":studentid,"Name":Name,"Age":Age,"Class":Class})
     return student_List

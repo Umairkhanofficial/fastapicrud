@@ -13,6 +13,7 @@ uvicorn = "^0.29.0"
 standard = "^1.0.3"
 pytest = "^8.1.1"
 httpx = "^0.27.0"
+mypy = "^1.9.0"
 
 [tool.poetry.scripts]
 dev= "studentcrud.main:start"
