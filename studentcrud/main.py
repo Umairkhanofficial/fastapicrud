@@ -71,6 +71,20 @@ def deleteStudent(studentid:int):
 def temp():
     print("hello")
     return "temp"
+#pydantic body prams
+class Item(BaseModel):
+    id:int
+    title:str
+    disc:str
 
+@app.get("/item/{id}/body/{name}")
+def bodypram(id:int,name:str, item:Item):
+    print(item.title)
+    return (item.id)
+#Query param validation
+@app.get("/queryval")
+def queryValidation(id:int,name:Annotated[str,Query(min_length=3,max_length=5)]):
+    return name
+ 
 def start():
     uvicorn.run("studentcrud.main:app",host="127.0.0.1",port=8080,reload=True),
