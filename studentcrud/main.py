@@ -1,7 +1,7 @@
-from fastapi import FastAPI,Path,Query
+from fastapi import FastAPI,Path,Query,Body
 import uvicorn 
-from pydantic import BaseModel
-from typing import Annotated 
+from pydantic import BaseModel ,Field
+from typing import Annotated ,Optional
 
 
 app = FastAPI()
@@ -16,7 +16,9 @@ student_List = [
 @app.get("/person")
 def perso(person):
     return person
-
+@app.get("/testing")
+def test(q: Annotated[int,Query(ge=2)]):
+    return q
 
 #all students in list
 @app.get("/students")
@@ -73,18 +75,23 @@ def temp():
     return "temp"
 #pydantic body prams
 class Item(BaseModel):
-    id:int
+    id:int = Field(ge=2)
     title:str
     disc:str
-
-@app.get("/item/{id}/body/{name}")
-def bodypram(id:int,name:str, item:Item):
+class NewItem(BaseModel):
+    date:str
+    func:str
+    
+@app.get("/body/{name}")
+def bodypram(id:int, item:Item,item2:NewItem,count:Annotated[int,Body()]):
     print(item.title)
-    return (item.id)
+    print(item2.func)
+    return (item,item2)
 #Query param validation
 @app.get("/queryval")
-def queryValidation(id:int,name:Annotated[str,Query(min_length=3,max_length=5)]):
-    return name
+def queryValidation(name:Annotated[str,Query(min_length=3,max_length=5,pattern="^[a-zA-Z]")]):
+    
+    return name,
  
 def start():
     uvicorn.run("studentcrud.main:app",host="127.0.0.1",port=8080,reload=True),
